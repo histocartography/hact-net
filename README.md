@@ -2,9 +2,11 @@
 
 This repository contains the code to reproduce results of the [Hierarchical Graph Representations in Digital Pathology](https://arxiv.org/pdf/2102.11057.pdf) paper. 
 
-The code heavily relies on the [`histocartography`](https://github.com/histocartography/histocartography) library, a python-based package for modeling and learning with graphs of pathology images. 
+The code mostly relies on the [`histocartography`](https://github.com/histocartography/histocartography) library, a python-based package for modeling and learning with graphs of pathology images. 
 
 All the experiments are based on the BRACS dataset. The data needs to be downloaded separately (see Installation steps). 
+
+![Overview of the proposed approach.](figs/readme_fig1.png)
 
 ## Installation 
 
@@ -13,7 +15,7 @@ All the experiments are based on the BRACS dataset. The data needs to be downloa
 Clone the repo:
 
 ```
-git clone <> && cd hact-net
+git clone https://github.com/histocartography/hact-net.git && cd hact-net
 ```
 
 Create a conda environment and activate it:
@@ -27,7 +29,7 @@ conda activate hactnet
 
 BRACS is a dataset of Hematoxylin and Eosin (H&E) histopathological images for automated detection/classification of breast tumors. BRACS includes >4k tumor regions-of-interest labeled in 7 categories (Normal, Benign, UDH, ADH, FEA, DCIS, Invasive). 
 
-In order to download the BRACS dataset, you need to create an account [there](https://www.bracs.icar.cnr.it/). Then, go to `Data Collection`, `Download`, and hit the `Regions of Interest Set` button to access the data. Download the `v1` data. The data are stored on an FTP server. 
+In order to download the BRACS dataset, you need to create an account [there](https://www.bracs.icar.cnr.it/). Then, go to `Data Collection`, `Download`, and hit the `Regions of Interest Set` button to access the data. Download the `previous_version` data. The data are stored on an FTP server. 
 
 ## Running the code 
 
@@ -81,27 +83,27 @@ hact-net-data
 
 ### Step 2: Training HACTNet 
 
-We provide the option to train 3 classes of models, namely a Cell Graph model, Tissue Graph model and HACTNet model. 
+We provide the option to train 3 types of models, namely a Cell Graph model, Tissue Graph model and HACTNet model. 
 
 
 Training HACTNet as:
 
 ```
-python train.py --cg_path <SOME-SAVE-PATH>/hact-net-data/cell_graphs/ --tg_path <SOME-SAVE-PATH>/hact-net-data/tissue_graphs/ --assign_mat_path <SOME-SAVE-PATH>/hact-net-data/assignment_matrices/  --config_fpath ../data/config/hact_bracs_hactnet_7_classes_pna.yml -b 32 --in_ram --epochs 100 -l 0.0005 
+python train.py --cg_path <SOME-SAVE-PATH>/hact-net-data/cell_graphs/ --tg_path <SOME-SAVE-PATH>/hact-net-data/tissue_graphs/ --assign_mat_path <SOME-SAVE-PATH>/hact-net-data/assignment_matrices/  --config_fpath ../data/config/hact_bracs_hactnet_7_classes_pna.yml -b 8 --in_ram --epochs 60 -l 0.0005 
 ```
 
 
 Training a Cell Graph model as:
 
 ```
-python train.py --cg_path <SOME-SAVE-PATH>/hact-net-data/cell_graphs/ --config_fpath ../data/config/cg_bracs_cggnn_7_classes_pna.yml -b 32 --in_ram --epochs 100 -l 0.0005 
+python train.py --cg_path <SOME-SAVE-PATH>/hact-net-data/cell_graphs/ --config_fpath ../data/config/cg_bracs_cggnn_7_classes_pna.yml -b 8 --in_ram --epochs 60 -l 0.0005 
 
 ```
 
 Training a Tissue Graph model as:
 
 ```
-python train.py --tg_path <SOME-SAVE-PATH>/hact-net-data/tissue_graphs/ --config_fpath ../data/config/tg_bracs_tggnn_7_classes_pna.yml -b 32 --in_ram --epochs 100 -l 0.0005 
+python train.py --tg_path <SOME-SAVE-PATH>/hact-net-data/tissue_graphs/ --config_fpath ../data/config/tg_bracs_tggnn_7_classes_pna.yml -b 8 --in_ram --epochs 60 -l 0.0005 
 
 ```
 
@@ -151,9 +153,9 @@ We provide 3 pretrained checkpoints performing as:
 
 | Model         | Accuracy      | Weighted F1-score  |
 | ------------- |:-------------:| -----:             |
-| Cell Graph Model   | ??| ?? |
-| Tissue Graph Model | ??      | ?? |
-| HACTNet Model      | ??      | ?? |
+| Cell Graph Model   | 58.1 | 56.7 |
+| Tissue Graph Model | 58.6 | 57.8 |
+| HACTNet Model      | 61.7   | 61.5 |
 
 
 If you use this code, please consider citing our work:
