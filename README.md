@@ -151,8 +151,8 @@ python inference.py --cg_path <SOME-SAVE-PATH>/hact-net-data/cell_graphs/ --tg_p
 
 We provide 3 pretrained checkpoints performing as:
 
-| Model         | Accuracy      | Weighted F1-score  |
-| ------------- |:-------------:| -----:             |
+| Model | Accuracy | Weighted F1-score |
+| ----- |:--------:|:-----------------:|
 | Cell Graph Model   | 58.1 | 56.7 |
 | Tissue Graph Model | 58.6 | 57.8 |
 | HACTNet Model      | 61.7   | 61.5 |
