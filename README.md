@@ -10,7 +10,7 @@ All the experiments are based on the BRACS dataset. The data needs to be downloa
 
 ## Installation 
 
-### Cloning and handling ependencies 
+### Cloning and handling dependencies 
 
 Clone the repo:
 
